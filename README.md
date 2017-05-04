@@ -11,14 +11,13 @@ This is my project 3 in Udacity Front-End Web Developer course.
 
 ### Rules
 
-*Avoid to collide with enemy.*
+1. Avoid to collide with enemy
+2. Reach the water without collide with the Enemy. You get as many attempts possible in 30 seconds. 
+3. You respawn if you collide with enemy or reach the goal.
 
-**Mission**
-Reach the water without collide with the Enemy. You get as many attempts possible in 30 seconds.
+**-5 points** : Player collide with enemy.
 
-**-5** points : Collide with enemy and player respawn.
-
-**10+** points : Reach water and player respawn.
+**10+ points** : Player reaches water without collision.
 
 ### Game instructions
 
