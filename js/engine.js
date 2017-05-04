@@ -24,10 +24,17 @@ var Engine = (function(global) {
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime;
-
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
+
+    //add a scoreboard
+    canvassb = doc.createElement('canvas')
+    ctxscoreboard = canvassb.getContext('2d')
+    canvassb.width = 300;
+    canvassb.height = 200;
+    doc.body.appendChild(canvassb);
+
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -69,6 +76,50 @@ var Engine = (function(global) {
         main();
     }
 
+    /* This function add and updates scoreboard canvas with current stats.
+     * points, failedcount and how many times player reach water.
+     */
+    function updatescoreboard() {
+        // add scoreboard Rect.
+        ctxscoreboard.clearRect(0, 0, canvas.width, canvas.height);
+        ctxscoreboard.rect(5, 5, 290, 170);
+        ctxscoreboard.stroke();
+        // add scoreboard information
+        ctxscoreboard.font = "20px Arial";
+        ctxscoreboard.fillText("SCOREBOARD", 80, 30);
+        ctxscoreboard.font = "15px Arial";
+        ctxscoreboard.fillText("Reached water:", 10, 60);
+        ctxscoreboard.save();
+        ctxscoreboard.fillStyle = "green";
+        ctxscoreboard.fillText(gamevar.watercount, 120, 60);
+        ctxscoreboard.restore();
+        ctxscoreboard.save();
+        ctxscoreboard.fillText("Failed attempts:", 10, 90)
+        ctxscoreboard.fillStyle = "red";
+        ctxscoreboard.fillText(gamevar.failedcount, 120, 90);
+        ctxscoreboard.restore();
+        ctxscoreboard.font = "20px Arial";
+        ctxscoreboard.save();
+        ctxscoreboard.fillText("Time left:", 10, 120)
+        if (timeleft < 20) {
+            ctxscoreboard.fillStyle = "red";
+        } else {
+            ctxscoreboard.fillStyle = "black";
+        }
+        ctxscoreboard.fillText(timeleft, 120, 120);
+        ctxscoreboard.restore();
+        ctxscoreboard.font = "30px Arial";
+        ctxscoreboard.save();
+        ctxscoreboard.fillText("points", 150, 150)
+        gamevar.points = (gamevar.watercount * 10) + (gamevar.failedcount * -5)
+        if (gamevar.points < 0) {
+            ctxscoreboard.fillStyle = "red";
+        } else {
+            ctxscoreboard.fillStyle = "green";
+        }
+        ctxscoreboard.fillText(gamevar.points, 240, 150)
+        ctxscoreboard.restore();
+    }
     /* This function is called by main (our game loop) and itself calls all
      * of the functions which may need to update entity's data. Based on how
      * you implement your collision detection (when two entities occupy the
@@ -108,12 +159,12 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/water-block.png', // Top row is water
+                'images/stone-block.png', // Row 1 of 3 of stone
+                'images/stone-block.png', // Row 2 of 3 of stone
+                'images/stone-block.png', // Row 3 of 3 of stone
+                'images/grass-block.png', // Row 1 of 2 of grass
+                'images/grass-block.png' // Row 2 of 2 of grass
             ],
             numRows = 6,
             numCols = 5,
@@ -137,6 +188,7 @@ var Engine = (function(global) {
         }
 
         renderEntities();
+        updatescoreboard(); //update scoreboard stats.
     }
 
     /* This function is called by the render function and is called on each game
