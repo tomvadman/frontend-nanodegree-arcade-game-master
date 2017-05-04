@@ -26,7 +26,7 @@ Click restart button if you want to restart the game.
 
 ### Live demo
 
-http://github.dsenze.io/arcadegame
+https://dsenze.github.io/arcadegame/
 
 
 
