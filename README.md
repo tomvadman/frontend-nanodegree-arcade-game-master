@@ -9,16 +9,18 @@ This is my project 3 in Udacity Front-End Web Developer course.
 
 **Frogger Game** is an easy arcade game with simple rules. Move the player over the field and avoid collision with bugs. Bugs will go over the playfield in random speed.
 
-### Game instructions
+### Rules
 
-*Simple instruction : Avoid to collide with enemy.*
+*Avoid to collide with enemy.*
 
 **Mission**
-Your mission is to reach the water without collide with the Enemy in 30 seconds and collect points.
+Reach the water without collide with the Enemy. You get as many attempts possible in 30 seconds.
 
-Collide with enemy **-5** points and player respawn.
+**-5** points : Collide with enemy and player respawn.
 
-Reach water **10+** points and player respawn.
+**10+** points : Reach water and player respawn.
+
+### Game instructions
 
 **UP/DOWN/RIGHT/LEFT** to move player.
 
